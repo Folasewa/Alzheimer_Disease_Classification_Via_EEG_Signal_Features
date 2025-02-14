@@ -45,7 +45,15 @@ EEG_Alzheimer_Classification/
 │   ├── rf_model.pkl          # saved random forest model
 │   ├── svm_model.pkl         # saved support vector machine model
 │   ├── lightgbm_model.pkl    # saved lightgbm model
+
+│-- plots/                    # visualization plots directory 
+│   ├── frequency_domain.png    # saved frequency domain plots for both AD and CN
+│   ├── time_frequency_domain.png  # saved time-frequency domain plots for both AD and CN
+│   ├── correlation_matrix.png        # saved connectivity matrix for both AD and CN
 │
+│-- reports/                    # report of my unit and integration test
+│   ├── report.html    # html file of the test report
+
 │-- src/                            # Python scripts for EEG processing and modeling
 │   ├── preprocessing.py            # EEG Preprocessing (filtering, noise removal, ICA)
 │   ├── epoch_extraction.py         # Extracting 4s epochs with 50% overlap
@@ -57,7 +65,9 @@ EEG_Alzheimer_Classification/
 │   ├── plot_viz.py               #plots frequency and time-frequency domain of AD vs CN
 │   ├── statistical_test.py       #Compute independent t-tests between CN and AD groups
 │   ├── logger.py                #Logging module for debugging and monitoring
-│
+│   ├── main.py                #This script runs the entire EEG pipeline from preprocessing to statistical test
+
+
 │-- tests/                                      # Python scripts for performing unit tests
 │   ├── test_classification_model.py            # unit testing for the classification pipeline
 │   ├── test_complexity_metrics_extraction.py   # unit testing for the complexity metrics extraction
@@ -68,7 +78,6 @@ EEG_Alzheimer_Classification/
 │   
 │
 │-- bash.sh                 # Bash script for dataset setup and folder structure
-│-- main.py                 # Main pipeline script (calls all processing steps)
 │-- my_project.code-workspace     # VS Code workspace settings
 │-- pyproject.toml                # Project metadata and dependencies
 │-- README.md               # Project documentation
@@ -76,8 +85,8 @@ EEG_Alzheimer_Classification/
 │-- tox.ini         # Automated testing configuration
 ```
 
-###  Key Stages of the Project
-#### A. Data Import & Setup
+##  Key Stages of the Project
+### A. Data Import & Setup
 
 #### 1. Dataset: EEG data is obtained from OpenNeuro: 
 [https://openneuro.org/datasets/ds004504/versions/1.0.2/download#](https://openneuro.org/datasets/ds004504/versions/1.0.2/download#)
@@ -86,7 +95,7 @@ EEG_Alzheimer_Classification/
 
 #### 3. Options for manual download or DataLad download are included.
 
-#### B. EEG Preprocessing (preprocessing.py)
+### B. EEG Preprocessing (preprocessing.py)
 #### 1. Band-pass filtering (0.5 - 45 Hz) to remove unwanted noise.
 
 #### 2. Independent Component Analysis (ICA) for artifact removal.
@@ -97,37 +106,37 @@ EEG_Alzheimer_Classification/
 
 #### 5. Preprocessed files are saved in .fif format.
 
-#### C. Epoch Extraction (epoch_extraction.py)
+### C. Epoch Extraction (epoch_extraction.py)
 #### 1. Extracts 4-second non-overlapping epochs with 50% overlap.
 #### 2. Saves each epoch as an individual .npy file for further feature extraction.
 
-#### C Feature Extraction
+### D Feature Extraction
 
-#### C1 Spectral Metrics (spectrum_metrics_extraction.py)
-#### 1. Time domain metrics:  Mean, Variance and Interquartile Range computed
+#### D1 Spectral Metrics (spectrum_metrics_extraction.py)
+##### 1. Time domain metrics:  Mean, Variance and Interquartile Range computed
 
-#### 2. Power Spectral Density (PSD) computed using Welch’s method.
+##### 2. Power Spectral Density (PSD) computed using Welch’s method.
 
-#### 3. Band-specific power values (Delta, Theta, Alpha, Beta, Gamma).
+##### 3. Band-specific power values (Delta, Theta, Alpha, Beta, Gamma).
 
-#### 4. Relative Band Power (RBP) normalizes each band’s power against total power.
+##### 4. Relative Band Power (RBP) normalizes each band’s power against total power.
 
-#### C2 Complexity Metrics (complexity_metrics_extraction.py)
+#### D2 Complexity Metrics (complexity_metrics_extraction.py)
 
-#### 1. Entropy-based metrics: Approximate Entropy (ApEn), Sample Entropy (SampEn), Permutation Entropy (PermEn).
+##### 1. Entropy-based metrics: Approximate Entropy (ApEn), Sample Entropy (SampEn), Permutation Entropy (PermEn).
 
-#### 2. Raw complexity dataset undergoes additional cleaning to remove NaNs, ensuring compatibility with classifiers.
+##### 2. Raw complexity dataset undergoes additional cleaning to remove NaNs, ensuring compatibility with classifiers.
 
-#### C3 Synchronization Metrics (synchronization_metrics_extraction.py)
+#### D3 Synchronization Metrics (synchronization_metrics_extraction.py)
 
-#### 1. Functional connectivity analysis using Pearson correlation and/or Phase Locking Value (PLV).
+##### 1. Functional connectivity analysis using Pearson correlation and/or Phase Locking Value (PLV).
 
-#### 2. Graph-based features: Clustering Coefficient, Characteristic Path Length, Global Efficiency, Small-Worldness.
+##### 2. Graph-based features: Clustering Coefficient, Characteristic Path Length, Global Efficiency, Small-Worldness.
 
-#### 3. Thresholding strongest 60% of connections to construct binary brain networks.
+##### 3. Thresholding strongest 60% of connections to construct binary brain networks.
 
 
-#### D. Feature Merging & Classification (classification_model.py)
+### E. Feature Merging & Classification (classification_model.py)
 
 #### Feature datasets (spectral, complexity, synchronization) are merged.
 
@@ -137,26 +146,30 @@ EEG_Alzheimer_Classification/
 
 #### Machine Learning Models:
 
-   #### Decision Tree
+   ##### Decision Tree
 
-   #### Random Forest
+   ##### Random Forest
 
-   #### Support Vector Machine (SVM)
+   ##### Support Vector Machine (SVM)
 
-   #### LightGBM
+   ##### LightGBM
 
 #### Cross-validation using GroupShuffleSplit to prevent subject overlap between train/test sets.
 
 #### Performance Metrics:
 
-   #### Accuracy
+   ##### Accuracy
 
-   #### Sensitivity (Recall for AD patients)
+   ##### Sensitivity (Recall for AD patients)
 
-   #### Specificity (Correctly classifying CN individuals)
+   ##### Specificity (Correctly classifying CN individuals)
+
+#### Statistical Test:
+
+   ##### Independent t-test
 
 
-### Dataset Description & Source
+## Dataset Description & Source
 
 #### Dataset: [https://openneuro.org/datasets/ds004504/versions/1.0.2/download#](https://openneuro.org/datasets/ds004504/versions/1.0.2/download#)
 
@@ -181,7 +194,8 @@ EEG_Alzheimer_Classification/
 
    #### Functional connectivity metrics and graph theory-based synchronization features.
 
-### Instructions to Run the Project
+
+## Instructions to Run the Project
 
 #### 1. Install Dependencies
 
