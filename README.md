@@ -28,52 +28,9 @@
 
 ### Project Structure
 
-EEG_Alzheimer_Classification/
-│-- data/                  # Dataset directory (original + generated feature datasets)
-│   ├── raw_dataset/        # EEG dataset (downloaded from OpenNeuro)
-│   ├── filtered_subjects/  # Filtered EEG files
-│   ├── filtered_preprocessed/  # Preprocessed EEG files
-│   ├── epochs_overlap/     # Extracted EEG epochs
-│   ├── spectrum_features.csv    # Spectrum feature dataset
-│   ├── complexity_features.csv  # Complexity feature dataset
-│   ├── synchronization_features.csv  # Synchronization dataset
-│   ├── final_dataset.csv   # Combined dataset for classification
-│
-│-- model/                    # classification model directory 
-│   ├── dt_model.pkl          # saved decision tree model
-│   ├── rf_model.pkl          # saved random forest model
-│   ├── svm_model.pkl         # saved support vector machine model
-│   ├── lightgbm_model.pkl    # saved lightgbm model
-│
-│-- src/                            # Python scripts for EEG processing and modeling
-│   ├── preprocessing.py            # EEG Preprocessing (filtering, noise removal, ICA)
-│   ├── epoch_extraction.py         # Extracting 4s epochs with 50% overlap
-│   ├── spectrum_metrics_extraction.py  # Extracting frequency-domain features (PSD, power ratios)
-│   ├── complexity_metrics_extraction.py  # Extracting entropy-based complexity metrics
-│   ├── complexity_preprocessing_optimization #post-cleaning on the extracted complexity metrics
-│   ├── synchronization_metrics_extraction.py  # Extracting brain network synchronization metrics
-│   ├── classification_model.py    # Merging features, training classifiers, evaluation
-│   ├── plot_viz.py               #plots frequency and time-frequency domain of AD vs CN
-│   ├── statistical_test.py       #Compute independent t-tests between CN and AD groups
-│   ├── logger.py                #Logging module for debugging and monitoring
-│
-│-- tests/                                      # Python scripts for performing unit tests
-│   ├── test_classification_model.py            # unit testing for the classification pipeline
-│   ├── test_complexity_metrics_extraction.py   # unit testing for the complexity metrics extraction
-│   ├── test_epoch_extraction.py  # unit testing for the epoch extraction
-│   ├── test_preprocesing.py  # unit testing for EEG preprocessing
-│   ├── test_spectrum_metrics_extraction.py #unit testing for spectrum metrics extraction
-│   ├── test_synchronization_metrics_extraction.py  # unit testing for synch metrics extraction
-│   
-│
-│-- bash.sh                 # Bash script for dataset setup and folder structure
-│-- main.py                 # Main pipeline script (calls all processing steps)
-│-- my_project.code-workspace     # VS Code workspace settings
-│-- pyproject.toml                # Project metadata and dependencies
-│-- README.md               # Project documentation
-│-- requirements.txt         # Required dependencies for Python environment
-│-- tox.ini         # Automated testing configuration
-
+```
+EEG_Alzheimer_Classification/ │-- data/ # Dataset directory (original + generated feature datasets) │ ├── raw_dataset/ # EEG dataset (downloaded from OpenNeuro) │ ├── filtered_subjects/ # Filtered EEG files │ ├── filtered_preprocessed/ # Preprocessed EEG files │ ├── epochs_overlap/ # Extracted EEG epochs │ ├── spectrum_features.csv # Spectrum feature dataset │ ├── complexity_features.csv # Complexity feature dataset │ ├── synchronization_features.csv # Synchronization dataset │ ├── final_dataset.csv # Combined dataset for classification │ │-- model/ # Classification model directory │ ├── dt_model.pkl # Saved decision tree model │ ├── rf_model.pkl # Saved random forest model │ ├── svm_model.pkl # Saved support vector machine model │ ├── lightgbm_model.pkl # Saved LightGBM model │ │-- src/ # Python scripts for EEG processing and modeling │ ├── preprocessing.py # EEG Preprocessing (filtering, noise removal, ICA) │ ├── epoch_extraction.py # Extracting 4s epochs with 50% overlap │ ├── spectrum_metrics_extraction.py # Extracting frequency-domain features (PSD, power ratios) │ ├── complexity_metrics_extraction.py # Extracting entropy-based complexity metrics │ ├── complexity_preprocessing_optimization.py # Post-cleaning on the extracted complexity metrics │ ├── synchronization_metrics_extraction.py # Extracting brain network synchronization metrics │ ├── classification_model.py # Merging features, training classifiers, evaluation │ ├── plot_viz.py # Plots frequency and time-frequency domain of AD vs CN │ ├── statistical_test.py # Compute independent t-tests between CN and AD groups │ ├── logger.py # Logging module for debugging and monitoring │ │-- tests/ # Python scripts for performing unit tests │ ├── test_classification_model.py # Unit testing for the classification pipeline │ ├── test_complexity_metrics_extraction.py # Unit testing for complexity metrics extraction │ ├── test_epoch_extraction.py # Unit testing for epoch extraction │ ├── test_preprocessing.py # Unit testing for EEG preprocessing │ ├── test_spectrum_metrics_extraction.py # Unit testing for spectrum metrics extraction │ ├── test_synchronization_metrics_extraction.py # Unit testing for synchronization metrics extraction │ │-- bash.sh # Bash script for dataset setup and folder structure │-- main.py # Main pipeline script (calls all processing steps) │-- my_project.code-workspace # VS Code workspace settings │-- pyproject.toml # Project metadata and dependencies │-- README.md # Project documentation │-- requirements.txt # Required dependencies for Python environment │-- tox.ini # Automated testing configuration
+```
 
 ###  Key Stages of the Project
 #### A. Data Import & Setup
