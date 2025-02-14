@@ -204,18 +204,48 @@ EEG_Alzheimer_Classification/
 
 `bash bash.sh`
 
-#### 3. Run the Complete Pipeline
+3. #### Run Individual Steps
+
+#### Preprocessing: 
+`python -m run_preprocessing`
+
+#### Epoch Extraction: 
+`python -m run_epoch_extraction`
+
+#### Complexity Metrics: 
+`python -m run_complexity`
+
+#### Complexity Optimization: 
+`python -m run_complexity_optimization`
+
+#### Spectral Metrics: 
+`python -m run_spectrum`
+
+#### Synchronization Metrics: 
+`python -m run_synchronization`
+
+#### Classification Model: 
+`python -m run_classification_model`
+
+#### Visualization: 
+`python -m run_plot_visualization`
+
+#### Statistical Analysis: 
+`python -m run_statistical_analysis`
+
+#### 4. Run the Complete Pipeline
 
 `python main.py`
+#### 5. Run the test
+`tox`
 
-#### 4. Expected Output:
+#### 6. Expected Output:
 
+   #### -Preprocessed EEG files saved in filtered_preprocessed/.
 
-   #### Preprocessed EEG files saved in filtered_preprocessed/.
+   #### -Extracted epochs saved in epochs_overlap/.
 
-   #### Extracted epochs saved in epochs_overlap/.
+   #### -Feature datasets: spectrum_features.csv, complexity_features.csv, synchronization_features.csv.
 
-   #### Feature datasets: spectrum_features.csv, complexity_features.csv, synchronization_features.csv.
-
-   #### Final classification results printed with accuracy, sensitivity, specificity.
+   #### -Final classification results printed with accuracy, sensitivity, specificity.
 
