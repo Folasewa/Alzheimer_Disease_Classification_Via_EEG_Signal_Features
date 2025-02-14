@@ -68,7 +68,7 @@ EEG_Alzheimer_Classification/
 │   ├── main.py                #This script runs the entire EEG pipeline from preprocessing to statistical test
 
 
-│-- tests/                                      # Python scripts for performing unit tests
+│-- tests/                                      # Python scripts for performing unit and integration tests
 │   ├── test_classification_model.py            # unit and integration testing for the classification pipeline
 │   ├── test_complexity_metrics_extraction.py   # unit and integration testing for the complexity metrics extraction
 │   ├── test_epoch_extraction.py  # unit and integration testing for the epoch extraction
@@ -88,110 +88,110 @@ EEG_Alzheimer_Classification/
 ##  Key Stages of the Project
 ### A. Data Import & Setup
 
-#### 1. Dataset: EEG data is obtained from OpenNeuro: 
+#### -Dataset: EEG data is obtained from OpenNeuro: 
 [https://openneuro.org/datasets/ds004504/versions/1.0.2/download#](https://openneuro.org/datasets/ds004504/versions/1.0.2/download#)
 
-#### 2. Bash Script (bash.sh) automates dataset structure setup.
+#### -Bash Script (bash.sh) automates dataset structure setup.
 
-#### 3. Options for manual download or DataLad download are included.
+#### -Options for manual download or DataLad download are included.
 
 ### B. EEG Preprocessing (preprocessing.py)
-#### 1. Band-pass filtering (0.5 - 45 Hz) to remove unwanted noise.
+#### -Band-pass filtering (0.5 - 45 Hz) to remove unwanted noise.
 
-#### 2. Independent Component Analysis (ICA) for artifact removal.
+#### -Independent Component Analysis (ICA) for artifact removal.
 
-#### 3. Re-referencing EEG channels using an average reference.
+#### -Re-referencing EEG channels using an average reference.
 
-#### 4. Artifact Subspace Reconstruction (ASR) to exclude high-amplitude segments.
+#### -Artifact Subspace Reconstruction (ASR) to exclude high-amplitude segments.
 
-#### 5. Preprocessed files are saved in .fif format.
+#### -Preprocessed files are saved in .fif format.
 
 ### C. Epoch Extraction (epoch_extraction.py)
-#### 1. Extracts 4-second non-overlapping epochs with 50% overlap.
-#### 2. Saves each epoch as an individual .npy file for further feature extraction.
+#### -Extracts 4-second non-overlapping epochs with 50% overlap.
+#### -Saves each epoch as an individual .npy file for further feature extraction.
 
 ### D Feature Extraction
 
 #### D1 Spectral Metrics (spectrum_metrics_extraction.py)
-##### 1. Time domain metrics:  Mean, Variance and Interquartile Range computed
+##### -Time domain metrics:  Mean, Variance and Interquartile Range computed
 
-##### 2. Power Spectral Density (PSD) computed using Welch’s method.
+##### -Power Spectral Density (PSD) computed using Welch’s method.
 
-##### 3. Band-specific power values (Delta, Theta, Alpha, Beta, Gamma).
+##### -Band-specific power values (Delta, Theta, Alpha, Beta, Gamma).
 
-##### 4. Relative Band Power (RBP) normalizes each band’s power against total power.
+##### -Relative Band Power (RBP) normalizes each band’s power against total power.
 
 #### D2 Complexity Metrics (complexity_metrics_extraction.py)
 
-##### 1. Entropy-based metrics: Approximate Entropy (ApEn), Sample Entropy (SampEn), Permutation Entropy (PermEn).
+##### -Entropy-based metrics: Approximate Entropy (ApEn), Sample Entropy (SampEn), Permutation Entropy (PermEn).
 
-##### 2. Raw complexity dataset undergoes additional cleaning to remove NaNs, ensuring compatibility with classifiers.
+##### -Raw complexity dataset undergoes additional cleaning to remove NaNs, ensuring compatibility with classifiers.
 
 #### D3 Synchronization Metrics (synchronization_metrics_extraction.py)
 
-##### 1. Functional connectivity analysis using Pearson correlation and/or Phase Locking Value (PLV).
+##### -Functional connectivity analysis using Pearson correlation and/or Phase Locking Value (PLV).
 
-##### 2. Graph-based features: Clustering Coefficient, Characteristic Path Length, Global Efficiency, Small-Worldness.
+##### -Graph-based features: Clustering Coefficient, Characteristic Path Length, Global Efficiency, Small-Worldness.
 
-##### 3. Thresholding strongest 60% of connections to construct binary brain networks.
+##### -Thresholding strongest 60% of connections to construct binary brain networks.
 
 
 ### E. Feature Merging & Classification (classification_model.py)
 
-#### Feature datasets (spectral, complexity, synchronization) are merged.
+#### -Feature datasets (spectral, complexity, synchronization) are merged.
 
-#### Subjects are labeled (AD = 1, CN = 0).
+#### -Subjects are labeled (AD = 1, CN = 0).
 
 #### Data cleaning: removing missing values and infinite values.
 
-#### Machine Learning Models:
+### Machine Learning Models:
 
-   ##### Decision Tree
+   ##### -Decision Tree
 
-   ##### Random Forest
+   ##### -Random Forest
 
-   ##### Support Vector Machine (SVM)
+   ##### -Support Vector Machine (SVM)
 
-   ##### LightGBM
+   ##### -LightGBM
 
-#### Cross-validation using GroupShuffleSplit to prevent subject overlap between train/test sets.
+### Cross-validation using GroupShuffleSplit to prevent subject overlap between train/test sets.
 
-#### Performance Metrics:
+### Performance Metrics:
 
-   ##### Accuracy
+   ##### -Accuracy
 
-   ##### Sensitivity (Recall for AD patients)
+   ##### -Sensitivity (Recall for AD patients)
 
-   ##### Specificity (Correctly classifying CN individuals)
+   ##### -Specificity (Correctly classifying CN individuals)
 
-#### Statistical Test:
+### Statistical Test:
 
-   ##### Independent t-test
+   ##### -Independent t-test
 
 
 ## Dataset Description & Source
 
 #### Dataset: [https://openneuro.org/datasets/ds004504/versions/1.0.2/download#](https://openneuro.org/datasets/ds004504/versions/1.0.2/download#)
 
-#### Link to Paper:(https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2023.1288295/full#ref18)
+#### Link to Paper:https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2023.1288295/full#ref18
 
 #### EEG Data:
 
-   #### 65 subjects (36 AD, 29 CN)
+   #### -65 subjects (36 AD, 29 CN)
 
-   #### Eyes-closed resting-state EEG
+   #### -Eyes-closed resting-state EEG
 
-   #### 500 Hz sampling rate
+   #### -500 Hz sampling rate
 
-   #### Electrode placement: 19 scalp electrodes (10-20 system)
+   #### -Electrode placement: 19 scalp electrodes (10-20 system)
 
 #### Extracted Features:
 
-   #### Time-domain features (mean, variance, IQR), Power Spectral Density (PSD), Relative Band Power
+   #### -Time-domain features (mean, variance, IQR), Power Spectral Density (PSD), Relative Band Power
 
-   #### Approximate Entropy, Sample Entropy, Permutation Entropy
+   #### -Approximate Entropy, Sample Entropy, Permutation Entropy
 
-   #### Functional connectivity metrics and graph theory-based synchronization features.
+   #### -Functional connectivity metrics and graph theory-based synchronization features.
 
 
 ## Instructions to Run the Project
