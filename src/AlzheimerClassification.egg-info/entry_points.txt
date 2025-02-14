@@ -1,0 +1,11 @@
+[console_scripts]
+run_classification_model = classification_model:main
+run_complexity = complexity_metrics_extraction:main
+run_complexity_optimization = complexity_preprocessing_optimization:main
+run_epoch_extraction = epoch_extraction:main
+run_full_pipeline = main:main
+run_plot_visualization = plot_viz:main
+run_preprocessing = preprocessing:main
+run_spectrum = spectrum_metrics_extraction:main
+run_statistical_analysis = statistical_test:main
+run_synchronization = synchronization_metrics_extraction:main

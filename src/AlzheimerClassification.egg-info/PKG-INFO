@@ -1,0 +1,37 @@
+Metadata-Version: 2.2
+Name: AlzheimerClassification
+Version: 0.1.0
+Summary: EEG signal processing and classification pipeline for Alzheimer detection.
+Author-email: Folasewa Abdulsalam and Prateet Kandel <abdulsalammaryam381@gmail.com>
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: mne
+Requires-Dist: scipy
+Requires-Dist: seaborn
+Requires-Dist: joblib
+Requires-Dist: networkx
+Requires-Dist: EntropyHub
+Requires-Dist: scikit-learn
+Requires-Dist: lightgbm
+Provides-Extra: dev
+Requires-Dist: tox; extra == "dev"
+Requires-Dist: my-project[ds]; extra == "dev"
+Requires-Dist: my-project[lint]; extra == "dev"
+Requires-Dist: my-project[test]; extra == "dev"
+Requires-Dist: my-project[doc]; extra == "dev"
+Requires-Dist: my-project[build]; extra == "dev"
+Provides-Extra: ds
+Provides-Extra: lint
+Requires-Dist: mypy; extra == "lint"
+Requires-Dist: ruff; extra == "lint"
+Provides-Extra: test
+Requires-Dist: pytest>=8.3.3; extra == "test"
+Requires-Dist: pytest-cov>=5.0.0; extra == "test"
+Requires-Dist: coverage[toml]==7.3.1; extra == "test"
+Requires-Dist: pytest-html==4.1.1; extra == "test"
+Provides-Extra: doc
+Requires-Dist: sphinx; extra == "doc"
+Requires-Dist: sphinx-rtd-theme; extra == "doc"
+Provides-Extra: build
+Requires-Dist: build>=1.2.2; extra == "build"

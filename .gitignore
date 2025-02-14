@@ -1,0 +1,7 @@
+data/
+tests/test_data/complex.csv
+tests/test_data/dataset_project_ds_nolabel.csv
+tests/test_data/dataset_project_ds.csv
+tests/test_data/spectrum.csv
+tests/test_data/synchronization.csv
+tests/test_data/complexity_csv_file.csv

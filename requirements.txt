@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+mne
+scipy
+seaborn
+joblib
+networkx
+EntropyHub
+scikit-learn
+lightgbm
+
