@@ -173,7 +173,7 @@ EEG_Alzheimer_Classification/
 
 #### Dataset: [https://openneuro.org/datasets/ds004504/versions/1.0.2/download#](https://openneuro.org/datasets/ds004504/versions/1.0.2/download#)
 
-#### Link to Paper:[https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2023.1288295/full#ref18] (https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2023.1288295/full#ref18)
+#### Link to Paper:(https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2023.1288295/full#ref18)
 
 #### EEG Data:
 
