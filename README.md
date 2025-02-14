@@ -69,12 +69,12 @@ EEG_Alzheimer_Classification/
 
 
 │-- tests/                                      # Python scripts for performing unit tests
-│   ├── test_classification_model.py            # unit testing for the classification pipeline
-│   ├── test_complexity_metrics_extraction.py   # unit testing for the complexity metrics extraction
-│   ├── test_epoch_extraction.py  # unit testing for the epoch extraction
-│   ├── test_preprocesing.py  # unit testing for EEG preprocessing
-│   ├── test_spectrum_metrics_extraction.py #unit testing for spectrum metrics extraction
-│   ├── test_synchronization_metrics_extraction.py  # unit testing for synch metrics extraction
+│   ├── test_classification_model.py            # unit and integration testing for the classification pipeline
+│   ├── test_complexity_metrics_extraction.py   # unit and integration testing for the complexity metrics extraction
+│   ├── test_epoch_extraction.py  # unit and integration testing for the epoch extraction
+│   ├── test_preprocesing.py  # unit an dintegration testing for EEG preprocessing
+│   ├── test_spectrum_metrics_extraction.py #unit and integration testing for spectrum metrics extraction
+│   ├── test_synchronization_metrics_extraction.py  # unit and integration testing for synchronization metrics extraction
 │   
 │
 │-- bash.sh                 # Bash script for dataset setup and folder structure
