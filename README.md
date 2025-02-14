@@ -204,7 +204,7 @@ EEG_Alzheimer_Classification/
 
 `bash bash.sh`
 
-3. #### Run Individual Steps
+#### 3. Run Individual Steps
 
 #### Preprocessing: 
 `python -m run_preprocessing`
