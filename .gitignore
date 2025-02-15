@@ -1,4 +1,6 @@
 data/
+/tests/test_data/epochs_overlap/
+tests/test_data/ds004504
 tests/test_data/complex.csv
 tests/test_data/dataset_project_ds_nolabel.csv
 tests/test_data/dataset_project_ds.csv

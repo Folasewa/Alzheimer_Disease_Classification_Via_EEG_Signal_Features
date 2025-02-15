@@ -20,22 +20,20 @@ def compute_basic_statistics(epoch):
         n_channels = epoch.shape[0]
         stats_features = {}
         for ch_idx in range(n_channels): #looping through each channel
-                #calculate mean
-                mean_value = np.mean(epoch[ch_idx])
-                stats_features[f"channel_{ch_idx}_mean"] = mean_value
+            #calculate mean
+            mean_value = np.mean(epoch[ch_idx])
+            stats_features[f"channel_{ch_idx}_mean"] = mean_value
 
-                #calculate variance
-                variance_value = np.var(epoch[ch_idx])
-                stats_features[f"channel_{ch_idx}_variance"] = variance_value
+            #calculate variance
+            variance_value = np.var(epoch[ch_idx])
+            stats_features[f"channel_{ch_idx}_variance"] = variance_value
 
-                #calculate IQR
-                IQR_value = np.percentile(epoch[ch_idx], 75) - np.percentile(epoch[ch_idx], 25)
-                stats_features[f"channel_{ch_idx}_IQR"] = IQR_value
+            #calculate IQR
+            IQR_value = np.percentile(epoch[ch_idx], 75) - np.percentile(epoch[ch_idx], 25)
+            stats_features[f"channel_{ch_idx}_IQR"] = IQR_value
     except Exception as e:
             logger.error(f"Error computing stats {ch_idx}: {e}")
-            stats_features[f"channel_{ch_idx}_mean"] = np.nan
-            stats_features[f"channel_{ch_idx}_variance"] = np.nan
-            stats_features[f"channel_{ch_idx}_IQR"] = np.nan
+            stats_features = {}
     return stats_features
 
 def compute_psd(epoch, sfreq):
@@ -67,22 +65,20 @@ def compute_psd(epoch, sfreq):
         }
 
         for ch_idx in range(n_channels):
-                freqs, psd = welch(epoch[ch_idx], fs=sfreq, nperseg=n_samples)
+            freqs, psd = welch(epoch[ch_idx], fs=sfreq, nperseg=n_samples)
 
-                # Extract PSD for the full frequency range
-                psd_full_range = np.sum(psd[(freqs >=0.5) & (freqs <=45)]) #gets the total power within the full range
-                psd_features[f"channel_{ch_idx}_psd_full"] = psd_full_range
+            # Extract PSD for the full frequency range
+            psd_full_range = np.sum(psd[(freqs >=0.5) & (freqs <=45)]) #gets the total power within the full range
+            psd_features[f"channel_{ch_idx}_psd_full"] = psd_full_range
 
-                # Extract PSD for each EEG rhythm (delta, theta, etc)
+            # Extract PSD for each EEG rhythm (delta, theta, etc)
 
-                for band, (fmin, fmax) in bands.items(): #iterating over the key and value
-                    band_power = np.sum(psd[(freqs >= fmin) & (freqs < fmax)]) #calculates total power for each band
-                    psd_features[f"channel_{ch_idx}_psd_{band}"] = band_power
+            for band, (fmin, fmax) in bands.items(): #iterating over the key and value
+                band_power = np.sum(psd[(freqs >= fmin) & (freqs < fmax)]) #calculates total power for each band
+                psd_features[f"channel_{ch_idx}_psd_{band}"] = band_power
     except Exception as e:
-            logger.error(f"Error computing PSD {e}")
-            psd_features[f"channel_{ch_idx}_psd_full"] = np.nan
-            for band in bands.keys():
-                psd_features[f"channel_{ch_idx}_psd_{band}"] = np.nan
+        logger.error(f"Error computing PSD {e}")
+        psd_features = {}
 
     return psd_features
 
@@ -114,8 +110,7 @@ def compute_relative_band_power(psd_features, n_channels):
                     relative_band_power[f"channel_{ch_idx}_relative_{band}"] = band_power / total_power
     except Exception as e:
             logger.error(f"Error computing relative band power for channel {ch_idx}: {e}")
-            for band in ['delta', 'theta', 'alpha', 'beta', 'gamma']:
-                relative_band_power[f"channel_{ch_idx}_relative_{band}"] = np.nan
+            relative_band_power = {}
     return relative_band_power
 
 # Step4: Combine all these metrics in one function to extract spectrum features
@@ -152,6 +147,7 @@ def extract_spectrum_features(epoch, sfreq):
         relative_band_power = compute_relative_band_power(psd_features, n_channels)
         features.update(relative_band_power)
     except Exception as e:
+        features = {}
         logger.error(f"Error extracting spectrum features {e}")
 
     return features
@@ -177,18 +173,18 @@ def batch_extract_spectrum_features(output_folder, spectrum_file_csv, sfreq):
                     features['epoch_number'] = int(epoch_number)
                     # Append the features to the list
                     spectrum_features.append(features)
+        # Convert the list to dataframe
+
+        spectrum_features_df = pd.DataFrame(spectrum_features)
+
+        # Save to the csv file
+
+        spectrum_features_df.to_csv(spectrum_file_csv, index=False)
+
+        logger.info(f"Spectrum features saved to {spectrum_file_csv}")
     except Exception as e:
-                logger.error(f"Error extracting features {e}")
-
-    # Convert the list to dataframe
-
-    spectrum_features_df = pd.DataFrame(spectrum_features)
-
-    # Save to the csv file
-
-    spectrum_features_df.to_csv(spectrum_file_csv, index=False)
-
-    logger.info(f"Spectrum features saved to {spectrum_file_csv}")
+        spectrum_features_df = pd.DataFrame([])
+        logger.error(f"Error extracting features {e}")
 
     return spectrum_features_df
 

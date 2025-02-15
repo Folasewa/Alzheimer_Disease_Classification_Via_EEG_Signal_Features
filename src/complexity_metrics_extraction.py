@@ -46,10 +46,8 @@ def extract_entropy_features(epoch, subject_id, epoch_number):
             features[f"channel_{ch_idx}_PermEn"] = perm_en
 
     except Exception as e:
-        logger.error(f"Error extracting entropy features for channel {ch_idx}: {e}")
-        features[f"channel_{ch_idx}_ApEn"] = np.nan
-        features[f"channel_{ch_idx}_SampEn"] = np.nan
-        features[f"channel_{ch_idx}_PermEn"] = np.nan
+        logger.error(f"Error extracting entropy features for channel: {e}")
+        features = {}
     return features
 
 # Function definition
@@ -94,7 +92,7 @@ def process_epoch_file(epochs_file, output_folder, complexity_file_csv, processe
         logger.info(f"Processed and saved: {epochs_file}")
 
     except Exception as e:
-        logger.error(f"Error processing and extracting entropy features for {epochs_file}: {e}")
+        logger.error(f"Error processing and extracting entropy features for: {e}")
         features_df = pd.DataFrame([])
 
     return features_df

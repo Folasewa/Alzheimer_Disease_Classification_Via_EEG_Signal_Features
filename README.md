@@ -207,35 +207,35 @@ EEG_Alzheimer_Classification/
 #### 3. Run Individual Steps
 
 #### Preprocessing: 
-`python -m run_preprocessing`
+`run_preprocessing`
 
 #### Epoch Extraction: 
-`python -m run_epoch_extraction`
+`run_epoch_extraction`
 
 #### Complexity Metrics: 
-`python -m run_complexity`
+`run_complexity`
 
 #### Complexity Optimization: 
-`python -m run_complexity_optimization`
+`run_complexity_optimization`
 
 #### Spectral Metrics: 
-`python -m run_spectrum`
+`run_spectrum`
 
 #### Synchronization Metrics: 
-`python -m run_synchronization`
+`run_synchronization`
 
 #### Classification Model: 
-`python -m run_classification_model`
+`run_classification_model`
 
 #### Visualization: 
-`python -m run_plot_visualization`
+`run_plot_visualization`
 
 #### Statistical Analysis: 
-`python -m run_statistical_analysis`
+`run_statistical_analysis`
 
 #### 4. Run the Complete Pipeline
 
-`python main.py`
+`run_full_pipeline`
 #### 5. Run the test
 `tox`
 

@@ -37,7 +37,7 @@ def connectivity_matrix(epoch, method):
                         raise ValueError("Invalid method of synchronization, choose either pearson or plv")
     except Exception as e:
             logger.error(f"Error computing the connectivity matrix {e}")
-            connectivity_matrix[i, j] = np.nan
+            connectivity_matrix = np.array([])
 
     return connectivity_matrix
 
@@ -67,7 +67,7 @@ def threshold_matrix(connectivity_matrix, threshold ):
         adjacency_matrix = np.fill_diagonal(adjacency_matrix, 0)
     except Exception as e:
         logger.error(f"Error thresholding the matrix {e}")
-        adjacency_matrix = np.full_like(connectivity_matrix, np.nan)
+        adjacency_matrix = np.array([])
 
     return adjacency_matrix
 
