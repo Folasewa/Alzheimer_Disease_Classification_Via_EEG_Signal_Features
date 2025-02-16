@@ -12,6 +12,7 @@ This project aims to develop a **machine learning pipeline** for classifying **A
 ✅ **Extracting Spectral, Complexity, and Synchronization metrics**  
 ✅ **Training & Evaluating Classification Models** *(Decision Tree, SVM, Random Forest, LightGBM)*  
 ✅ **Statistical Analysis between the Groups** *(Independent T-test)* 
+
 ✅ **Visualization** *(Frequency-domain, Correlation matrix, classification models performance analysis, etc)* 
 
 ---
