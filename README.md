@@ -197,51 +197,61 @@ EEG_Alzheimer_Classification/
 ## Instructions to Run the Project
 
 ```python
-#### 1. Install Dependencies
 
-`pip install -r requirements.txt`
+### 1. Set up your virtual environment
 
-#### 2. Setup Dataset & Folder Structure
+#install virtualenv to set up your python environment
+pip install virtualenv
+#create your virtual environment
+python -m venv venv
+#activate your virtual environment- venv should appear as a prefix if successfully activated
+venv\Scripts\activate # Windows
+source venv/bin/activate # Linux
 
-`bash bash.sh`
+### 2. Setup Dataset & Folder Structure
 
-#### 3. Run Individual Steps
+bash bash.sh
 
-#### Preprocessing: 
-`run_preprocessing`
+### 3 Install projects packages 
+pip install -e .
 
-#### Epoch Extraction: 
-`run_epoch_extraction`
+### 4. Run Individual Steps
 
-#### Complexity Metrics: 
-`run_complexity`
+### Preprocessing: 
+run_preprocessing
 
-#### Complexity Optimization: 
-`run_complexity_optimization`
+### Epoch Extraction: 
+run_epoch_extraction
 
-#### Spectral Metrics: 
-`run_spectrum`
+### Complexity Metrics: 
+run_complexity
 
-#### Synchronization Metrics: 
-`run_synchronization`
+### Complexity Optimization: 
+run_complexity_optimization
 
-#### Classification Model: 
-`run_classification_model`
+### Spectral Metrics: 
+run_spectrum
 
-#### Visualization: 
-`run_plot_visualization`
+### Synchronization Metrics: 
+run_synchronization
 
-#### Statistical Analysis: 
-`run_statistical_analysis`
+### Classification Model: 
+run_classification_model
 
-#### 4. Run the Complete Pipeline
+### Visualization: 
+run_plot_visualization
 
-`run_full_pipeline`
+### Statistical Analysis: 
+run_statistical_analysis
+
+### 4. Run the Complete Pipeline
+
+run_full_pipeline
 #### 5. Run the test
-`tox`
+tox
 
 ```
-#### 6. Expected Output:
+#### 5. Expected Output:
 
    #### -Preprocessed EEG files saved in filtered_preprocessed/.
 
