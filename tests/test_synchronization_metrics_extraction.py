@@ -21,25 +21,17 @@ def test_connectivity_matrix_neg():
 
 def test_threshold_matrix_pos():
     epoch = np.load("tests/test_data/epochs_overlap/sub-001_epoch-001.npy")
-
-    # Step 1: Compute the connectivity matrix
     connectivity = connectivity_matrix(epoch, "pearson")
     print("##################", connectivity)
-    threshold_value = 0.9
-
-    # Step 2: Apply thresholding to create the adjacency matrix
+    threshold_value = 0.8
     adjacency = threshold_matrix(connectivity, threshold_value)
     print("^^^^^^^^^^^^^^^^^^^^^^^", adjacency)
     assert len(adjacency)
 
 def test_threshold_matrix_neg():
     epoch = np.array([])
-
-    # Step 1: Compute the connectivity matrix
     connectivity = connectivity_matrix(epoch, "pearson")
-    threshold_value = 0.6
-
-    # Step 2: Apply thresholding to create the adjacency matrix
+    threshold_value = 0.8
     adjacency = threshold_matrix(connectivity, threshold_value)
     assert not len(adjacency)
 
