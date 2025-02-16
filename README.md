@@ -1,30 +1,41 @@
 
-## Data Science Final Workshop Project 
+# 🧠 Data Science Final Workshop Project  
+## 📊 Diagnosis of Alzheimer's Disease via Resting-State EEG  
+### 🔗 Integration of Spectrum, Complexity, and Synchronization Signal Features  
 
-## Diagnosis of Alzheimer's Disease via Resting State EEG - Integration of Spectrum, Complexity and Synchronization Signal Features
+---
 
-### Project Overview
+## 📌 Project Overview  
+This project aims to develop a **machine learning pipeline** for classifying **Alzheimer's Disease (AD)** using **EEG signal features**.  
+📌 The workflow includes:  
+✅ **Preprocessing EEG data** *(artifact removal, filtering, and re-referencing)*  
+✅ **Extracting Spectral, Complexity, and Synchronization metrics**  
+✅ **Training & Evaluating Classification Models** *(Decision Tree, SVM, Random Forest, LightGBM)*  
+✅ **Statistical Analysis between the Groups** *(Independent T-test)* 
+✅ **Visualization** *(Frequency-domain, Correlation matrix, classification models performance analysis, etc)* 
 
-#### This project aims to develop a machine learning pipeline for classifying Alzheimer's Disease (AD) using EEG signal features. The pipeline consists of preprocessing EEG data, extracting spectral, complexity, and synchronization metrics, and training multiple classification models.
+---
 
-### Objectives
+## 🎯 Objectives  
 
-#### 1. Process raw EEG data from cognitively normal (CN) and Alzheimer's disease (AD) subjects.
+1️⃣ **Process raw EEG data** from **Cognitively Normal (CN)** and **Alzheimer's Disease (AD)** subjects.  
+2️⃣ **Extract EEG biomarkers** from **Spectral, Complexity, and Synchronization domains**.  
+3️⃣ **Train and evaluate machine learning models** to classify **AD vs CN**.  
+4️⃣ **Ensure reproducibility** by providing a structured **pipeline & automation scripts**.  
 
-#### 2. Extract relevant EEG biomarkers from spectral, complexity, and synchronization domains.
+---
 
-#### 3. Train and evaluate machine learning models for classifying AD vs CN.
+## 🔬 Key Assumptions & Hypothesis  
 
-#### 4. Ensure reproducibility by providing a structured pipeline and automation scripts.
+📌 **EEG Distinctions in AD vs CN**  
+🧠 EEG signals exhibit **distinct frequency & complexity patterns** that differentiate **AD from CN**.  
 
+📌 **Functional Connectivity & Brain Networks**  
+🔗 **Synchronization & functional connectivity metrics** capture **brain network dysfunctions** associated with AD.  
 
-### Key Assumptions and Hypothesis
+📌 **Machine Learning for AD Diagnosis**  
+🤖 **ML models** can **accurately classify AD vs CN** when trained on carefully extracted EEG features.  
 
-#### 1. EEG signals contain distinct frequency and complexity patterns that differentiate AD from CN.
-
-#### 2. Functional connectivity and synchronization metrics can capture brain network dysfunctions associated with AD.
-
-#### 3. Machine learning models can accurately classify AD vs CN when trained on carefully extracted features.
 
 ### Project Structure
 
