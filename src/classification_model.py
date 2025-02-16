@@ -20,7 +20,6 @@ def assign_label(subject_id):
     
     """
     try:
-
         subject_num = int(subject_id.split('-')[1])
         if subject_num in range(1,37):
             return 1
@@ -32,7 +31,6 @@ def assign_label(subject_id):
         logger.error(f"Error assigning label {e}")
         return None
 
-
 def apply_label(raw_data):
     """
     This function applies label assignment on raw data
@@ -40,7 +38,7 @@ def apply_label(raw_data):
     try:
         raw_data["label"] = raw_data["subject_id"].apply(assign_label)
         raw_data_labelled = raw_data
-    except Exception as e: #broad exception
+    except Exception as e:
         logger.error(f"Error applying label: {e}")
         raw_data_labelled = pd.DataFrame([])
     return raw_data_labelled
@@ -59,7 +57,7 @@ def data_cleaning(raw_data_labelled):
 
         # Remove rows with NaN in the dataset
         raw_data_labelled = raw_data_labelled.dropna()
-        raw_data_labelled.to_csv('data/raw_labelled_data.csv', index=False) #to save the updated data
+        raw_data_labelled.to_csv('data/raw_labelled_data.csv', index=False)
 
         X = raw_data_labelled.drop(["label", "subject_id", "epoch_number"], axis = 1)
         y = raw_data_labelled["label"]
@@ -87,7 +85,6 @@ def evaluate_model(model, X_test, y_test):
     This function evaluates the model's performance
     """
     try:
-
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
         sensitivity = recall_score(y_test, y_pred, pos_label=1)
@@ -99,12 +96,9 @@ def evaluate_model(model, X_test, y_test):
         logger.info(f"Accuracy: {accuracy:.4f}")
         logger.info(f"Sensitivity (Recall): {sensitivity:.4f}")
         logger.info(f"Specificity: {specificity:.4f}")
-
     except Exception as e:
         logger.error(f"Error evaluating the model {e}")
         accuracy, specificity, sensitivity = None, None, None
-
-
     return accuracy, specificity, sensitivity
 
 # Functions for model building
@@ -113,8 +107,7 @@ def train_evaluate_decision_tree(X_train, X_test, y_train, y_test):
     This function trains and evaluates the decision tree model
     """
     try:
-
-        print("\n.....training and evaluating with Decision Tree....")
+        logger.info("\n.....training and evaluating with Decision Tree....")
         dt_model = DecisionTreeClassifier(random_state=42,
                                         class_weight='balanced',
                                         max_depth=5, min_samples_split=5, min_samples_leaf=5)
@@ -131,9 +124,7 @@ def train_evaluate_random_forest(X_train, X_test, y_train, y_test):
     This function trains and evaluates the Random Forest model
     """
     try:
-
         logger.info("\n ... training and evaluating with Random Forest ...")
-
         rf_model = RandomForestClassifier(n_estimators= 100,
                                         max_depth=10,
                                         min_samples_split=5,
@@ -168,7 +159,6 @@ def train_evaluate_lightgbm(X_train, X_test, y_train, y_test):
     This function trains and evaluates the lightgbm model
     """
     try:
-
         logger.info("\n...training and evaluating with lightgbm...")
         lgb_model = lgb.LGBMClassifier(class_weight="balanced",random_state=42)
         lgb_model.fit(X_train, y_train)
@@ -190,7 +180,6 @@ def fill_metrics_dict(metrics_dict, model, accuracy, sensitivity, specificity):
     This function updates the metrics dictionary with new evaluation results.
     """
     try:
-
         metrics_dict['accuracy'].append(accuracy)
         metrics_dict['sensitivity'].append(sensitivity)
         metrics_dict['specificity'].append(specificity)
@@ -225,7 +214,6 @@ def cross_validate_models(X, y, raw_data, n_splits=5, test_size=0.2, random_stat
             if len(y_test.unique()) < 2:
                 logger.info(f"Skipping Fold {fold_idx + 1}: Test set does not contain both classes.")
                 continue
-
             logger.info(f"\n--- Fold {fold_idx + 1} ---")
 
             # Initialize metrics dictionaries for each model
@@ -235,17 +223,14 @@ def cross_validate_models(X, y, raw_data, n_splits=5, test_size=0.2, random_stat
             # Random Forest
             rf_model = train_evaluate_random_forest(X_train, X_test, y_train, y_test)
             rf_metrics = fill_metrics_dict(rf_metrics, rf_model, accuracy, sensitivity, specificity)
-            
             # SVM
             svm_model = train_evaluate_svm(X_train, X_test, y_train, y_test)
             svm_metrics = fill_metrics_dict(svm_metrics, svm_model, accuracy, sensitivity, specificity)
-
             #lightgbm
             lgb_model = train_evaluate_lightgbm(X_train, X_test, y_train, y_test)
             lgb_metrics = fill_metrics_dict(lgb_metrics, lgb_model, accuracy, sensitivity, specificity)
     except Exception as e:
         logger.error(f"Error performing cross-validation {e}")
-
     return dt_metrics, rf_metrics, svm_metrics, lgb_metrics
 
 def show_average_metrics(model_name, metrics_dict):
@@ -267,13 +252,10 @@ def average_metrics(dt_metrics, rf_metrics, svm_metrics, lgb_metrics):
 
     # Decision Tree
     show_average_metrics("Decision Tree", dt_metrics)
-
     # SVM
     show_average_metrics("SVM", svm_metrics)
-
     # Lightgbm
     show_average_metrics("LightGBM", lgb_metrics)
-
     # Random Forest
     show_average_metrics("Random Forest", rf_metrics)
 

@@ -11,7 +11,6 @@ logger = setup_logger("logger", "logs.log")
 def connectivity_matrix(epoch, method):
     """
     Compute the functional connectivity matrix for an epoch
-
     Parameters:
     -epoch: 2D numpy array (n_channels, n_samples_per_epoch)
     -method: synchronization method which can be pearson or phase locking value (plv)
@@ -38,7 +37,6 @@ def connectivity_matrix(epoch, method):
     except Exception as e:
             logger.error(f"Error computing the connectivity matrix {e}")
             connectivity_matrix = np.array([])
-
     return connectivity_matrix
 
 def threshold_matrix(connectivity_matrix, threshold ):
@@ -157,7 +155,6 @@ def process_and_save_sync_epoch(file_path, csv_file, synchronization_method, thr
     - threshold_value: Proportion of strongest connections to keep in adjacency matrix.
     """
     try:
-        # Load the epoch data
         epoch = np.load(file_path)
 
         # Step 1: Compute the connectivity matrix
@@ -183,7 +180,6 @@ def process_and_save_sync_epoch(file_path, csv_file, synchronization_method, thr
         write_header = not os.path.exists(csv_file) or os.path.getsize(csv_file) == 0  # Check if file is empty
         with open(csv_file, 'a') as f:
             df_metrics.to_csv(f, header=write_header, index=False)
-
         logger.info(f"Processed and saved: {file_name}")
 
     except Exception as e:
@@ -201,13 +197,11 @@ def main():
     # Main processing
     files_to_process, processed_set = checkpoint(graph_metrics_csv, output_folder)
     files_to_process = list(map(lambda x: output_folder + "/" + x, files_to_process))
-    # print(files_to_process, processed_set)
     # Process remaining epochs in parallel
     df_metrics = Parallel(n_jobs=-1)(
         delayed(process_and_save_sync_epoch)(file, graph_metrics_csv, synchronization_method, threshold_value)
         for file in files_to_process
     )
-
     logger.info(f"All epochs processed and saved to {graph_metrics_csv}.")
 
 if __name__ == "__main__":

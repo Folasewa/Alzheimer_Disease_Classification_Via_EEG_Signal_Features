@@ -12,23 +12,21 @@ def extract_required_value(cell, metric_type):
     - PermEn: Take the first value.
     """
     try:
-    # Handle space-separated values in brackets (e.g., "[2.6 1.2 0.7]")
+    # Handle space-separated values in brackets
         if isinstance(cell, str) and "[" in cell and "]" in cell:
             values = [float(x) for x in cell.strip("[]").split()]
-            return values[-1] if len(values) > 0 else np.nan  # Always return the last value
-
-    # Handle string representations of arrays (e.g., "array([2.6, 1.2, 0.7])")
+            return values[-1] if len(values) > 0 else np.nan
+    # Handle string representations of arrays
         elif isinstance(cell, str) and "array" in cell:
             start = cell.find("[")
             end = cell.find("]")
             if start != -1 and end != -1:
                 values = [float(x) for x in cell[start + 1:end].split(",")]
-                return values[-1] if len(values) > 0 else np.nan  # Always return the last value
-
+                return values[-1] if len(values) > 0 else np.nan
     # If already numeric, return as-is
         return float(cell)
     except (ValueError, AttributeError):
-     return np.nan  # Return NaN if extraction fails
+     return np.nan
 
 def preprocess_entropy_metrics(df):
 
@@ -37,7 +35,6 @@ def preprocess_entropy_metrics(df):
     for ApEn, SampEn, and PermEn.
     """
     try:
-
         for col in df.columns:
             if "ApEn" in col:
                 df[col] = df[col].apply(lambda x: extract_required_value(x, "ApEn"))
@@ -51,15 +48,9 @@ def preprocess_entropy_metrics(df):
     return df
 
 def main():
-    # Load your CSV file
     df = pd.read_csv("data/complex.csv")
-
-    # Preprocess the entropy metrics
     df = preprocess_entropy_metrics(df)
-
-    # Save the cleaned DataFrame to a new CSV file (optional)
     df.to_csv("data/complexity_csv_file.csv", index=False)
-
 
 if __name__ == "__main__":
     main()

@@ -19,7 +19,6 @@ def plot_group_psd(ax, smooth_freq, spline, band_edges, frequency_bands, colors,
     """
     try:
         ax.plot(smooth_freq, spline(smooth_freq), color=color, label=title)
-        
         # Shade frequency bands
         for i in range(len(frequency_bands)):
             ax.axvspan(band_edges[i], band_edges[i+1], color=colors[i], alpha=0.3)
@@ -88,7 +87,6 @@ def load_eeg_data(folder_path):
         for filename in sorted(os.listdir(folder_path)):  # Ensure subjects are read in order
             if filename.endswith(".fif"):
                 try:
-                    # Extract subject ID from filename (assuming format: "sub-XXX_task-eyesclosed.fif")
                     subject_id = int(filename.split("-")[1].split("_")[0])
                 except (ValueError, IndexError) as e:
                     logger.error(f"Skipping file due to unexpected name format: {filename} | Error: {e}")
@@ -169,10 +167,8 @@ def bar_plot_frequency_domain_features(raw_data_labelled):
         freq_domain_features = ['psd_delta', 'psd_theta', 'psd_alpha', 'psd_beta', 'psd_gamma']
         cn_group = raw_data_labelled[raw_data_labelled['label'] == 0]
         ad_group = raw_data_labelled[raw_data_labelled['label'] == 1]
-
         # Compute stats using median & variance
         cn_median, ad_median, cn_variance, ad_variance = compute_group_stats(freq_domain_features, cn_group, ad_group)
-
         # Define category labels
         freq_labels = ["Delta PSD", "Theta PSD", "Alpha PSD", "Beta PSD", "Gamma PSD"]
         bar_width = 0.2

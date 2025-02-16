@@ -44,10 +44,10 @@ def test_data_splitting_neg():
     raw_data_labelled = apply_label(raw_data)
     raw_data_labelled,  x, y = data_cleaning(raw_data_labelled)
     x_train,  x_test, y_train, y_test = data_splitting(x, y)
-    assert not len( x_test)
-    assert not len( x_train)
-    assert not len(y_train)
-    assert not len(y_test)
+    assert x_test.empty
+    assert x_train.empty
+    assert y_train.empty
+    assert y_test.empty
 
 def test_evaluate_model_pos():
     raw_data = pd.read_csv("tests/test_data/dataset_project_ds_nolabel.csv")
@@ -68,9 +68,9 @@ def test_evaluate_model_neg():
     x_train,  x_test, y_train, y_test = data_splitting(x, y)
     model = "/model"
     accuracy, specificity, sensitivity = evaluate_model(model,  x_test, y_test)
-    assert not accuracy
-    assert not specificity
-    assert not sensitivity
+    assert accuracy.empty
+    assert specificity.empty
+    assert sensitivity.empty
 
 def test_train_evaluate_decision_tree_pos():
     raw_data = pd.read_csv("tests/test_data/dataset_project_ds_nolabel.csv")
@@ -89,10 +89,10 @@ def test_train_evaluate_decision_tree_neg():
     raw_data_labelled,  x, y = data_cleaning(raw_data_labelled)
     x_train,  x_test, y_train, y_test = data_splitting(x, y)
     dt_model, accuracy, sensitivity, specificity = train_evaluate_decision_tree( x_train,  x_test, y_train, y_test)
-    assert dt_model is None
-    assert accuracy is None
-    assert sensitivity is None
-    assert specificity is None
+    assert dt_model.empty
+    assert accuracy.empty
+    assert sensitivity.empty
+    assert specificity.empty
 
 def test_train_evaluate_random_forest_pos():
     raw_data = pd.read_csv("tests/test_data/dataset_project_ds_nolabel.csv")
@@ -111,10 +111,10 @@ def test_train_evaluate_random_forest_neg():
     raw_data_labelled,  x, y = data_cleaning(raw_data_labelled)
     x_train,  x_test, y_train, y_test = data_splitting( x, y)
     rf_model, accuracy, sensitivity, specificity = train_evaluate_random_forest(x_train,  x_test, y_train, y_test)
-    assert rf_model is None
-    assert accuracy is None
-    assert sensitivity is None
-    assert specificity is None
+    assert rf_model.empty
+    assert accuracy.empty
+    assert sensitivity.empty
+    assert specificity.empty
 
 def test_train_evaluate_svm_pos():
     raw_data = pd.read_csv("tests/test_data/dataset_project_ds_nolabel.csv")
@@ -134,10 +134,10 @@ def test_train_evaluate_svm_neg():
     raw_data_labelled,  x, y = data_cleaning(raw_data_labelled)
     x_train,  x_test, y_train, y_test = data_splitting( x, y)
     svm_model, accuracy, sensitivity, specificity = train_evaluate_svm( x_train,  x_test, y_train, y_test)
-    assert svm_model is None
-    assert accuracy is None
-    assert sensitivity is None
-    assert specificity is None
+    assert svm_model.empty
+    assert accuracy.empty
+    assert sensitivity.empty
+    assert specificity.empty
 
 def test_train_evaluate_lightgbm_pos():
     raw_data = pd.read_csv("tests/test_data/dataset_project_ds_nolabel.csv")
@@ -156,10 +156,10 @@ def test_train_evaluate_lightgbm_neg():
     raw_data_labelled,  x, y = data_cleaning(raw_data_labelled)
     x_train,  x_test, y_train, y_test = data_splitting( x, y)
     lgb_model, accuracy, sensitivity, specificity = train_evaluate_lightgbm( x_train,  x_test, y_train, y_test)
-    assert lgb_model is None
-    assert accuracy is None
-    assert sensitivity is None
-    assert specificity is None
+    assert lgb_model.empty
+    assert accuracy.empty
+    assert sensitivity.empty
+    assert specificity.empty
 
 def test_cross_validate_model():
     raw_data = pd.read_csv("tests/test_data/dataset_project_ds_nolabel.csv")
