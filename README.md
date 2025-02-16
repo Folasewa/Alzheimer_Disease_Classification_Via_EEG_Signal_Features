@@ -196,6 +196,7 @@ EEG_Alzheimer_Classification/
 
 ## Instructions to Run the Project
 
+```python
 #### 1. Install Dependencies
 
 `pip install -r requirements.txt`
@@ -239,6 +240,7 @@ EEG_Alzheimer_Classification/
 #### 5. Run the test
 `tox`
 
+```
 #### 6. Expected Output:
 
    #### -Preprocessed EEG files saved in filtered_preprocessed/.
