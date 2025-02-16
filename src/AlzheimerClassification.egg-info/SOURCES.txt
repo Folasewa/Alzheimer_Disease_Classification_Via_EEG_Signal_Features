@@ -1,5 +1,7 @@
 .DS_Store
+.coverage
 .gitignore
+Alzheimer_Classification_Project_Roadmap.png
 Data Science Project Report.pdf
 README.md
 bash.sh
@@ -11,6 +13,10 @@ tox.ini
 model/dt_model.pkl
 model/rf_model.pkl
 model/svm_model.pkl
+plots/classification_model.jpeg
+plots/correlation_matrix_Cognitively Normal (CN)_Alzheimers Disease (AD).jpeg
+plots/frequency-domain.jpeg
+plots/frequency_domain-bar.jpeg
 reports/.DS_Store
 reports/report.html
 reports/assets/style.css
