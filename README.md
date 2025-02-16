@@ -86,6 +86,10 @@ EEG_Alzheimer_Classification/
 ```
 
 ##  Key Stages of the Project
+
+![Here is a roadmap showing the key stages in the project](Alzheimer_Classification_Project_Roadmap.png)
+
+
 ### A. Data Import & Setup
 
 #### -Dataset: EEG data is obtained from OpenNeuro: 
@@ -168,6 +172,11 @@ EEG_Alzheimer_Classification/
 
    ##### -Independent t-test
 
+### Visualization:
+   ##### -Correlation Matrix CN vs AD
+   ##### -Frequency Domain Features CN vs AD
+   ##### -Comparison of the classification models 
+
 
 ## Dataset Description & Source
 
@@ -244,10 +253,11 @@ run_plot_visualization
 ### Statistical Analysis: 
 run_statistical_analysis
 
-### 4. Run the Complete Pipeline
+### 5. Run the Complete Pipeline
 
 run_full_pipeline
-#### 5. Run the test
+
+### 5. Run the test
 tox
 
 ```
