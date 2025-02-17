@@ -59,9 +59,10 @@ EEG_Alzheimer_Classification/
 │   ├── lightgbm_model.pkl    # saved lightgbm model
 
 │-- plots/                    # visualization plots directory 
-│   ├── frequency_domain.png    # saved frequency domain plots for both AD and CN
-│   ├── time_frequency_domain.png  # saved time-frequency domain plots for both AD and CN
-│   ├── correlation_matrix.png        # saved connectivity matrix for both AD and CN
+│   ├── frequency_domain.jpeg    # saved frequency domain plots for both AD and CN
+│   ├── frequency_domain-bar.jpeg  # frequency domain bar plot for both AD and CN
+│   ├── correlation_matrix.jpeg        # saved connectivity matrix for both AD and CN
+│   ├── classification_model.jpeg        # bar plot of the classifiers perfomances
 │
 │-- reports/                    # report of my unit and integration test
 │   ├── report.html    # html file of the test report
@@ -81,6 +82,12 @@ EEG_Alzheimer_Classification/
 
 
 │-- tests/                                      # Python scripts for performing unit and integration tests
+│  ├──test_data/                               # sample test data for testing
+               ├── ds004504                     # raw eeg data
+               ├── epochs_overlap               #extracted epoch
+               ├── preprocessed_filtered        #preprocessed data
+   ├──test_model/                               # sample test data for testing
+               ├── dt_model                     #test decision tree model     
 │   ├── test_classification_model.py            # unit and integration testing for the classification pipeline
 │   ├── test_complexity_metrics_extraction.py   # unit and integration testing for the complexity metrics extraction
 │   ├── test_epoch_extraction.py  # unit and integration testing for the epoch extraction
@@ -310,9 +317,9 @@ tox
 📁 **Extracted Epochs:** Stored in **`epochs_overlap/`**  
 
 📊 **Feature Datasets:**  
-📄 **Spectral Features:** `spectrum_features.csv`  
-📄 **Complexity Features:** `complexity_features.csv`  
-📄 **Synchronization Features:** `synchronization_features.csv`  
+📄 **Spectral Features:** `spectrum.csv`  
+📄 **Complexity Features:** `complexity_csv_file.csv`  
+📄 **Synchronization Features:** `synchronization.csv`  
 
 📌 **Final Classification Results:**  
 📌 **Performance Metrics** *(Displayed in console/output file)*  
