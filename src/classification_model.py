@@ -76,8 +76,8 @@ def data_splitting(X, y):
     try:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     except Exception as e:
+        X_train, X_test, y_train, y_test = pd.DataFrame([]), pd.DataFrame([]), [], []
         logger.error("Error splitting the dataset {e}")
-        return pd.DataFrame([])
     return X_train, X_test, y_train, y_test
 
 def evaluate_model(model, X_test, y_test):
@@ -230,6 +230,7 @@ def cross_validate_models(X, y, raw_data, n_splits=5, test_size=0.2, random_stat
             lgb_model = train_evaluate_lightgbm(X_train, X_test, y_train, y_test)
             lgb_metrics = fill_metrics_dict(lgb_metrics, lgb_model, accuracy, sensitivity, specificity)
     except Exception as e:
+        dt_metrics, rf_metrics, svm_metrics, lgb_metrics = {}, {}, {}, {}
         logger.error(f"Error performing cross-validation {e}")
     return dt_metrics, rf_metrics, svm_metrics, lgb_metrics
 

@@ -17,7 +17,6 @@ def test_pos_batch_extract_epochs():
     data_folder_path = "tests/test_data/preprocessed_filtered"
     output_folder_path = "tests/test_data/epochs_overlap"
     epochs_data = batch_extract_epochs(data_folder_path, output_folder_path)
-
     assert len(epochs_data)
 
 def test_neg_batch__extract_epochs():

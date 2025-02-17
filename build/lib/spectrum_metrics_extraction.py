@@ -19,7 +19,7 @@ def compute_basic_statistics(epoch):
     try:
         n_channels = epoch.shape[0]
         stats_features = {}
-        for ch_idx in range(n_channels): #looping through each channel
+        for ch_idx in range(n_channels):
             #calculate mean
             mean_value = np.mean(epoch[ch_idx])
             stats_features[f"channel_{ch_idx}_mean"] = mean_value
@@ -53,8 +53,7 @@ def compute_psd(epoch, sfreq):
     try:
 
         n_channels, n_samples = epoch.shape
-        psd_features = {} #an empty dictionary to store the results
-
+        psd_features = {}
         # Define the bands as a dictionary, {band: (fmin, fmax)}
         bands = {
             'delta': (0.5, 4),
@@ -134,16 +133,12 @@ def extract_spectrum_features(epoch, sfreq):
 
         n_channels = epoch.shape[0]
         features = {}
-
             # Compute the time-domain metrics (Basic statistics)
-
         features.update(compute_basic_statistics(epoch))
-
             # Compute psd
         psd_features = compute_psd(epoch, sfreq)
         features.update(psd_features)
-
-            # Compute relative band power
+      # Compute relative band power
         relative_band_power = compute_relative_band_power(psd_features, n_channels)
         features.update(relative_band_power)
     except Exception as e:
@@ -161,31 +156,25 @@ def batch_extract_spectrum_features(output_folder, spectrum_file_csv, sfreq):
         # Looping through the epochs folder
         for epochs_file in os.listdir(output_folder):
             if epochs_file.endswith('.npy'):
-                    # Load the epochs
-                    epoch_path = os.path.join(output_folder, epochs_file) #this constructs the full path of the epoch folder
+                    epoch_path = os.path.join(output_folder, epochs_file)
                     epoch_data = np.load(epoch_path)
                     # Extract the spectrum features
                     features = extract_spectrum_features(epoch_data, sfreq)
                     # Add metadata (subject ID and epoch number)
                     subject_id = epochs_file.split('_')[0]  # Extract subject ID (e.g., "sub-001")
-                    epoch_number = epochs_file.split('_')[1].replace('epoch-', '').split('.')[0]# Extract epoch number
+                    epoch_number = epochs_file.split('_')[1].replace('epoch-', '').split('.')[0]
                     features['subject_id'] = subject_id
                     features['epoch_number'] = int(epoch_number)
                     # Append the features to the list
                     spectrum_features.append(features)
         # Convert the list to dataframe
-
         spectrum_features_df = pd.DataFrame(spectrum_features)
-
         # Save to the csv file
-
         spectrum_features_df.to_csv(spectrum_file_csv, index=False)
-
         logger.info(f"Spectrum features saved to {spectrum_file_csv}")
     except Exception as e:
         spectrum_features_df = pd.DataFrame([])
         logger.error(f"Error extracting features {e}")
-
     return spectrum_features_df
 
 def main():

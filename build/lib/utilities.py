@@ -12,7 +12,6 @@ def checkpoint(csv_file, output_folder):
             (row['subject_id'], row['epoch_number']) for _, row in existing_df.iterrows())
     else:
         processed_set = set()
-
     # List files to process
     files_to_process = [
         f for f in os.listdir(output_folder) if f.endswith('.npy')
