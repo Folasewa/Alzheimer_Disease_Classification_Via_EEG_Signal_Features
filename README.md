@@ -302,7 +302,7 @@ run_plot_visualization
 ### Statistical Analysis: 
 run_statistical_analysis
 
-### 5. Run the Complete Pipeline
+### Run the Complete Pipeline
 
 run_full_pipeline
 
